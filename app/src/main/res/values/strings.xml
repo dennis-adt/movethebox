@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Move The Box</string>
+    <string name="animate">Animate</string>
+    <string name="status">Translation Status:</string>
+    <string name="x_coord">X-Coord:</string>
+    <string name="box_width">Box width:</string>
+    <string name="box_x_coord">Box X-Coord:</string>
+</resources>
