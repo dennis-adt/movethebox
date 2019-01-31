@@ -2,6 +2,7 @@ package com.androiddesigntricks.movethebox;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -54,11 +55,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // GlobalLayoutListener that will trigger once the parent view group has finished adding the
         // boxView to its layout.
         parentLayout = findViewById(R.id.container);
-        boxView = findViewById(R.id.view);
+        boxView = findViewById(R.id.box_view);
         boxView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                boxView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                    boxView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                } else {
+                    boxView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                }
 
                 int[] outLocation = new int[2];
                 boxView.getLocationInWindow(outLocation);

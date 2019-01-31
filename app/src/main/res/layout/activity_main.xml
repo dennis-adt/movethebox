@@ -9,7 +9,7 @@
     tools:context=".MainActivity">
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/box_view"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginBottom="8dp"
