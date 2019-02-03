@@ -5,14 +5,24 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
     tools:context=".MainActivity">
+
+    <!--Include this is you want to have a black border inside the ConstraintLayout so you can
+        see the boundaries of the translation -->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@drawable/back"/>-->
 
     <View
         android:id="@+id/box_view"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
+
         android:background="@android:color/holo_blue_dark"
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintStart_toStartOf="parent"
