@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private float maxXTranslation;
     private int paddingLeft;
-    private int paddingRight;
-    private int marginLeft;
-    private int marginRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
