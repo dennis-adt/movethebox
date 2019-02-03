@@ -2,11 +2,9 @@ package com.androiddesigntricks.movethebox;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
@@ -32,9 +30,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private boolean movedToRight = false;
 
-    private float screenWidth;
+    private float maxXTranslation;
     private int paddingLeft;
     private int paddingRight;
+    private int marginLeft;
+    private int marginRight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +60,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onGlobalLayout() {
 
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-                    boxView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                } else {
-                    boxView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                }
+                boxView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
 
+                // You might want to use this if you are using an API level less than 16 (Jelly Bean).
+                //  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                //      boxView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //  } else {
+                //      boxView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                //  }
+
+                // Get the current x-coord of our box so we can update the UI.
                 int[] outLocation = new int[2];
                 boxView.getLocationInWindow(outLocation);
                 xCoordText.setText(String.format(Locale.CANADA, "%d px", outLocation[0]));
 
                 boxWidthText.setText(String.format(Locale.CANADA, "%d px", boxView.getWidth()));
 
-                screenWidth = calcMaxXTranslation();
-
                 paddingLeft = parentLayout.getPaddingLeft();
-                paddingRight = parentLayout.getPaddingRight();
+                maxXTranslation = calcMaxXTranslation();
             }
         });
     }
@@ -85,9 +87,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         float moveToX;
 
         if (movedToRight) {
-            moveToX = paddingLeft;
+            moveToX = 0;
         } else {
-            moveToX = screenWidth - paddingRight;
+            moveToX = maxXTranslation;
         }
 
         // Note we could have included the .start() method at the end of the chain here, but it's
@@ -97,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setDuration(DURATION)
                 .withStartAction(animateStartAction())
                 .setUpdateListener(animateUpdate())
-                .x(moveToX)
+                .translationX(moveToX)
                 .withEndAction(animateEndAction());
 
         // We could have also used object animators for this. The amount of code required for an
@@ -106,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // which method you use is entirely up to you, but keep in mind ViewPropertyAnimators
         // are more efficient than ObjectAnimators.
 
-        //ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(boxView, "x", moveToX);
+        //ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(boxView, "translationX", moveToX);
         //objectAnimator.setDuration(DURATION);
         //objectAnimator.addListener(addListener());
         //objectAnimator.addUpdateListener(animateUpdate());
@@ -116,11 +118,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private float calcMaxXTranslation() {
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int screenWidth = metrics.widthPixels;
+        int screenWidth = parentLayout.getWidth();
         int boxWidth = boxView.getWidth();
-        return screenWidth - boxWidth;
+
+        return screenWidth - boxWidth - paddingLeft;
     }
 
     private Runnable animateStartAction() {
