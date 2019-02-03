@@ -115,10 +115,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private float calcMaxXTranslation() {
-        int screenWidth = parentLayout.getWidth();
+        int parentWidth = parentLayout.getWidth();
         int boxWidth = boxView.getWidth();
 
-        return screenWidth - boxWidth - paddingLeft;
+        return parentWidth - boxWidth - paddingLeft;
     }
 
     private Runnable animateStartAction() {
