@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean movedToRight = false;
 
     private float maxXTranslation;
-    private int paddingLeft;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +72,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 boxWidthText.setText(String.format(Locale.CANADA, "%d px", boxView.getWidth()));
 
-                paddingLeft = parentLayout.getPaddingLeft();
                 maxXTranslation = calcMaxXTranslation();
             }
         });
@@ -116,9 +114,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private float calcMaxXTranslation() {
         int parentWidth = parentLayout.getWidth();
+        int paddingLeft = parentLayout.getPaddingLeft();
+        int paddingRight = parentLayout.getPaddingRight();
         int boxWidth = boxView.getWidth();
 
-        return parentWidth - boxWidth - paddingLeft;
+        return parentWidth - boxWidth - paddingLeft - paddingRight;
     }
 
     private Runnable animateStartAction() {

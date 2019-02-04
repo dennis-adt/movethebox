@@ -5,10 +5,10 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="8dp"
-    android:paddingRight="8dp"
+    android:paddingLeft="12dp"
+    android:paddingRight="36dp"
     android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
+    android:layout_marginRight="12dp"
     tools:context=".MainActivity">
 
     <!--Include this is you want to have a black border inside the ConstraintLayout so you can
