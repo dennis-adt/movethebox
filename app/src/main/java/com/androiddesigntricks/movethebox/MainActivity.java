@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         float moveToX;
 
         if (movedToRight) {
-            moveToX = 0;
+            moveToX = parentLayout.getPaddingLeft();
         } else {
             moveToX = maxXTranslation;
         }
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setDuration(DURATION)
                 .withStartAction(animateStartAction())
                 .setUpdateListener(animateUpdate())
-                .translationX(moveToX)
+                .x(moveToX)
                 .withEndAction(animateEndAction());
 
         // We could have also used object animators for this. The amount of code required for an
@@ -114,11 +114,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private float calcMaxXTranslation() {
         int parentWidth = parentLayout.getWidth();
-        int paddingLeft = parentLayout.getPaddingLeft();
         int paddingRight = parentLayout.getPaddingRight();
         int boxWidth = boxView.getWidth();
 
-        return parentWidth - boxWidth - paddingLeft - paddingRight;
+        // The parentLayout.getWidth() takes into consideration any layout margins for us. We only
+        // need to worry about the amount of right padding in our calculation.
+
+        return parentWidth - boxWidth - paddingRight;
     }
 
     private Runnable animateStartAction() {
