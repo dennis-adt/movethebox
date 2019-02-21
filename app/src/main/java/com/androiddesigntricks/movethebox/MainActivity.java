@@ -37,11 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        xCoordText = findViewById(R.id.box_x_coord);
-        boxWidthText = findViewById(R.id.box_width);
-        moveStatusText = findViewById(R.id.trans_status_text);
+        xCoordText = findViewById(R.id.xcoord_text);
+        boxWidthText = findViewById(R.id.boxwidth_text);
+        moveStatusText = findViewById(R.id.status_text);
 
-        Button actionButton = findViewById(R.id.button);
+        Button actionButton = findViewById(R.id.animate_button);
         actionButton.setOnClickListener(this);
 
         moveStatusText.setText(STATIONARY);

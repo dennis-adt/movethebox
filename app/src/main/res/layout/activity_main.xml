@@ -9,25 +9,16 @@
     android:paddingRight="8dp"
     tools:context=".MainActivity">
 
-    <!--Include this is you want to have a black border inside the ConstraintLayout so you can
-        see the boundaries of the translation -->
+    <!--Include this if you want to have a black border inside the ConstraintLayout so you can
+        see the boundaries of the translation. Don't forget to include the res/back.xml in your
+        project if you're copying this code. -->
     <!--<View-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="match_parent"-->
         <!--android:background="@drawable/back"/>-->
 
-    <View
-        android:id="@+id/box_view"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-
-        android:background="@android:color/holo_blue_dark"
-        app:layout_constraintBottom_toTopOf="@+id/divider2"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/animate_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -37,6 +28,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/status_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/status"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@+id/status_text"
+        app:layout_constraintEnd_toStartOf="@+id/status_text"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/status_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/status_label"
+        app:layout_constraintTop_toBottomOf="@+id/animate_button"
+        tools:text="STATIONARY" />
 
     <View
         android:id="@+id/divider"
@@ -48,32 +61,32 @@
         android:background="?android:attr/listDivider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/trans_status_text" />
+        app:layout_constraintTop_toBottomOf="@+id/status_text" />
 
-    <TextView
-        android:id="@+id/trans_status_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <View
+        android:id="@+id/box_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+
+        android:background="@android:color/holo_blue_dark"
+        app:layout_constraintBottom_toTopOf="@+id/divider2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="395dp"
+        android:layout_height="1dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/status"
-        android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/trans_status_text"
-        app:layout_constraintEnd_toStartOf="@+id/trans_status_text"
+        android:layout_marginBottom="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toTopOf="@+id/boxwidth_label"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/trans_status_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toEndOf="@+id/trans_status_text_view"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        tools:text="STATIONARY" />
-
-    <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/xcoord_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -84,44 +97,32 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/box_x_coord"
+        android:id="@+id/xcoord_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView4"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintBaseline_toBaselineOf="@+id/xcoord_label"
+        app:layout_constraintStart_toEndOf="@+id/xcoord_label"
         tools:text="1000" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/boxwidth_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:text="@string/box_width"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/box_x_coord"
+        app:layout_constraintBaseline_toBaselineOf="@+id/xcoord_text"
         app:layout_constraintStart_toStartOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/box_width"
+        android:id="@+id/boxwidth_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView6"
-        app:layout_constraintStart_toEndOf="@+id/textView6"
+        app:layout_constraintBaseline_toBaselineOf="@+id/boxwidth_label"
+        app:layout_constraintStart_toEndOf="@+id/boxwidth_label"
         tools:text="1000" />
-
-    <View
-        android:id="@+id/divider2"
-        android:layout_width="395dp"
-        android:layout_height="1dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
